@@ -4,7 +4,7 @@
 2. Установить docker-compose
 3. Перейти в корневую директорию, где лежит файлы Dockerfile и docker-compose.yml
 4. Открыть консоль
-5. Ввести магические буквы "docker-compose up"
+5. Ввести магические буквы `docker-compose up`
 6. Перейти на страницу в браузере http://localhost:8080
 7. !["Its a magic"](https://static.tildacdn.com/tild3633-6633-4637-b038-643034363038/image1.png "Its a magic")
 # Проделанная работа ДО
