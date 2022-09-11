@@ -17,5 +17,6 @@ RUN npm install
 
 # копируем исходный код
 COPY ./src/ /usr/app/src
+
 EXPOSE 8080
 CMD [ "npm", "start" ]
