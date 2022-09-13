@@ -1,6 +1,6 @@
 const express = require("express"),
   router = express.Router(),
-  mainPage = require("./mainPage.routes");
+  mainPage = require("./main-page");
 
 // routes
 router.use("/", mainPage);
@@ -12,17 +12,13 @@ router.use((req, res, next) => {
   err.status = 404;
   next(err);
 });
-// development error handler
-if (router.get("env") === "development") {
-  router.use((err, req, res, next) => {
-    res.status(err.status || 500);
-    res.send(`Произошла ошибка: ${err.message};  ${err}; `);
-  });
-}
 
-// production error handler
 router.use((err, req, res, next) => {
   res.status(err.status || 500);
-  res.send(`Произошла ошибка: ${err.message}`);
+  res.send(`Произошла ошибка!`);//res.send(`Произошла ошибка: ${err.message};  ${err}; `);
+  if (router.get("env") === "development") {
+    // development error handler
+    //mySUPERlogger3000.write(`nice try hacker, but WE catch u! Error=${err}`)
+  }
 });
 module.exports = router;
