@@ -1,4 +1,0 @@
-{
-  "DockerRun.DisableDockerrc": true,
-  "nodeDebugProcessPicker.match": ["**/app.js"]
-}
