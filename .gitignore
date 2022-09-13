@@ -126,5 +126,5 @@ dist
 .yarn/install-state.gz
 .pnp.*
 
-#ignoring VS code IDE temp files
+# ignoring VS code IDE temp files
 .vscode/
