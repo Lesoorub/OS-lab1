@@ -7,8 +7,8 @@ import { AppService } from './app.service';
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
-  @ApiOperation({summary: 'Корневая директория'})
-  @ApiResponse({status: 200})
+  @ApiOperation({ summary: 'Корневая директория' })
+  @ApiResponse({ status: 200 })
   @Get()
   getHello(): string {
     return this.appService.getHello();

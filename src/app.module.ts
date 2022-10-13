@@ -11,7 +11,7 @@ import { UsersModule } from './users/users.module';
   providers: [AppService],
   imports: [
     ConfigModule.forRoot({
-      envFilePath: `.${process.env.NODE_ENV}.env`
+      envFilePath: `.${process.env.NODE_ENV}.env`,
     }),
 
     SequelizeModule.forRoot({
@@ -22,7 +22,7 @@ import { UsersModule } from './users/users.module';
       password: process.env.POSTGRES_PASS,
       database: process.env.POSTGRES_DB,
       models: [User],
-      autoLoadModels: true
+      autoLoadModels: true,
     }),
     UsersModule,
   ],
