@@ -13,7 +13,9 @@ import { UsersModule } from './users/users.module';
     ConfigModule.forRoot({
       envFilePath: `.${process.env.NODE_ENV}.env`,
     }),
-
+    
+    /*
+    //БД Временно отключена
     SequelizeModule.forRoot({
       dialect: 'postgres',
       host: process.env.POSTGRES_HOST,
@@ -24,6 +26,7 @@ import { UsersModule } from './users/users.module';
       models: [User],
       autoLoadModels: true,
     }),
+    */
     UsersModule,
   ],
 })
