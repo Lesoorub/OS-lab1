@@ -5,6 +5,14 @@ import { User } from './users/users.model';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UsersModule } from './users/users.module';
+import { AuthModule } from './auth/auth.module';
+import { UserModule } from './user/user.module';
+import { StorageModule } from './storage/storage.module';
+import { ArticlesModule } from './articles/articles.module';
+import { ExercicesModule } from './exercices/exercices.module';
+import { FoodModule } from './food/food.module';
+import { StickersModule } from './stickers/stickers.module';
+import { RewardsModule } from './rewards/rewards.module';
 
 @Module({
   controllers: [AppController],
@@ -28,6 +36,22 @@ import { UsersModule } from './users/users.module';
     }),
     */
     UsersModule,
+    
+    AuthModule,
+    
+    UserModule,
+    
+    StorageModule,
+    
+    ArticlesModule,
+    
+    ExercicesModule,
+    
+    FoodModule,
+    
+    StickersModule,
+    
+    RewardsModule,
   ],
 })
 export class AppModule {}
