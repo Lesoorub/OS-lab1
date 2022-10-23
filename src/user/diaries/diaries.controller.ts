@@ -1,34 +1,50 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Put } from '@nestjs/common';
+import { ApiOperation, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { DiariesService } from './diaries.service';
-import { CreateDiaryDto } from './dto/create-diary.dto';
-import { UpdateDiaryDto } from './dto/update-diary.dto';
+import { addRewardToUserDiaryDto } from './dto/addRewardToUser-diary.dto';
+import { addStikerToUserDiaryDto } from './dto/addStikerToUser-diary.dto';
+import { updateStatisticUserDiaryDto } from './dto/updateStatisticUser-diary.dto';
 
-@Controller('diaries')
+
+@ApiTags('Пользователи: Модуль работы с пользовательской статистикой')
+@Controller('user/diaries')
 export class DiariesController {
   constructor(private readonly diariesService: DiariesService) {}
-
-  @Post()
-  create(@Body() createDiaryDto: CreateDiaryDto) {
-    return this.diariesService.create(createDiaryDto);
+  @ApiOperation({ summary: 'Получить данные статистики пользователя' })
+  @ApiResponse({ status: 200 })
+  @ApiParam({ name: 'id', type: 'number', description: 'Уникальный идентификатор',example:0})
+  @Get('/data/:id')
+  getStatisticUser(@Param('id') id: string) {
+    return this.diariesService.getStatisticUser(+id);
   }
 
-  @Get()
-  findAll() {
-    return this.diariesService.findAll();
+  @ApiOperation({ summary: 'Обновить данные статистики пользователя' })
+  @ApiResponse({ status: 200 })
+  @ApiParam({ name: 'id', type: 'number', description: 'Уникальный идентификатор',example:0})
+  @Put('/data/:id')
+  updateStatisticUser(@Param('id') id: string, @Body() updateStatisticUserDiaryDto: updateStatisticUserDiaryDto) {
+    return this.diariesService.update(+id, updateStatisticUserDiaryDto);
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.diariesService.findOne(+id);
+  @ApiOperation({ summary: 'Удаление данных статистики пользователя' })
+  @ApiResponse({ status: 200 })
+  @ApiParam({ name: 'id', type: 'number', description: 'Уникальный идентификатор',example:0})
+  @Delete('/data/:id')
+  removeStatisticUser(@Param('id') id: string) {
+    return this.diariesService.removeStatisticUser(+id);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateDiaryDto: UpdateDiaryDto) {
-    return this.diariesService.update(+id, updateDiaryDto);
+  @ApiOperation({ summary: 'Добавить стикер' })
+  @ApiResponse({ status: 200 })
+  @Post('add_sticker')
+  addStikerToUser(@Body() addStikerToUserDiaryDto: addStikerToUserDiaryDto) {
+    return this.diariesService.addStikerToUser(addStikerToUserDiaryDto);
   }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.diariesService.remove(+id);
+  @ApiOperation({ summary: 'Добавить награду' })
+  @ApiResponse({ status: 200 })
+  @Post('add_reward')
+  addRewardToUser(@Body() addRewardToUserDiaryDto: addRewardToUserDiaryDto) {
+    return this.diariesService.addRewardToUser(addRewardToUserDiaryDto);
   }
 }

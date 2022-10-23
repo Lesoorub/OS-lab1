@@ -8,11 +8,11 @@ export class ArticlesService {
     return 'This action adds a new article';
   }
 
-  findAll() {
+  getAll() {
     return `This action returns all articles`;
   }
 
-  findOne(id: number) {
+  getOne(id: number) {
     return `This action returns a #${id} article`;
   }
 

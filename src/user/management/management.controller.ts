@@ -1,34 +1,25 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Put } from '@nestjs/common';
 import { ManagementService } from './management.service';
-import { CreateManagementDto } from './dto/create-management.dto';
-import { UpdateManagementDto } from './dto/update-management.dto';
+import { addUserCoacherManagementDto } from './dto/addUserCoach-management.dto';
+import { updateRoleUserManagementDto } from './dto/updateRoleUser-management.dto';
+import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 
-@Controller('management')
+@ApiTags('Пользователи: Модуль работы с пользователями ')
+@Controller('user/management')
 export class ManagementController {
   constructor(private readonly managementService: ManagementService) {}
-
+  @ApiOperation({ summary: 'Добавить пользователя к наставнику' })
+  @ApiResponse({ status: 200 })
   @Post()
-  create(@Body() createManagementDto: CreateManagementDto) {
-    return this.managementService.create(createManagementDto);
+  addUserCoach(@Body() addUserCoacherManagementDto: addUserCoacherManagementDto) {
+    return this.managementService.addUserCoach(addUserCoacherManagementDto);
+  }
+  
+  @ApiOperation({ summary: 'Изменяет роль пользователя' })
+  @ApiResponse({ status: 200 })
+  @Put('role')
+  updateRoleUser(@Body() updateRoleUserManagementDto: updateRoleUserManagementDto) {
+    return this.managementService.updateRoleUser(updateRoleUserManagementDto);
   }
 
-  @Get()
-  findAll() {
-    return this.managementService.findAll();
-  }
-
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.managementService.findOne(+id);
-  }
-
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateManagementDto: UpdateManagementDto) {
-    return this.managementService.update(+id, updateManagementDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.managementService.remove(+id);
-  }
 }

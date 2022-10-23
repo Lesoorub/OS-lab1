@@ -1,26 +1,27 @@
 import { Injectable } from '@nestjs/common';
-import { CreateDiaryDto } from './dto/create-diary.dto';
-import { UpdateDiaryDto } from './dto/update-diary.dto';
+import { addRewardToUserDiaryDto } from './dto/addRewardToUser-diary.dto';
+import { addStikerToUserDiaryDto } from './dto/addStikerToUser-diary.dto';
+import { updateStatisticUserDiaryDto } from './dto/updateStatisticUser-diary.dto';
 
 @Injectable()
 export class DiariesService {
-  create(createDiaryDto: CreateDiaryDto) {
-    return 'This action adds a new diary';
-  }
-
-  findAll() {
-    return `This action returns all diaries`;
-  }
-
-  findOne(id: number) {
+  getStatisticUser(id: number) {
     return `This action returns a #${id} diary`;
   }
 
-  update(id: number, updateDiaryDto: UpdateDiaryDto) {
+  update(id: number, updateStatisticUserDiaryDto: updateStatisticUserDiaryDto) {
     return `This action updates a #${id} diary`;
   }
 
-  remove(id: number) {
+  removeStatisticUser(id: number) {
     return `This action removes a #${id} diary`;
+  }
+  
+  addStikerToUser(addStikerToUserDiaryDto: addStikerToUserDiaryDto) {
+    return 'This action addStikerToUser a diary';
+  }
+
+  addRewardToUser(addRewardToUserDiaryDto: addRewardToUserDiaryDto) {
+    return 'This action addRewardToUser a diary';
   }
 }

@@ -1,26 +1,17 @@
 import { Injectable } from '@nestjs/common';
-import { CreateProfileDto } from './dto/create-profile.dto';
-import { UpdateProfileDto } from './dto/update-profile.dto';
+import { updateDataUserProfileDto } from './dto/updateDataUser-profile.dto';
 
 @Injectable()
 export class ProfileService {
-  create(createProfileDto: CreateProfileDto) {
-    return 'This action adds a new profile';
-  }
-
-  findAll() {
-    return `This action returns all profile`;
-  }
-
-  findOne(id: number) {
+  getDataUser(id: number) {
     return `This action returns a #${id} profile`;
   }
 
-  update(id: number, updateProfileDto: UpdateProfileDto) {
+  updateDataUser(id: number, updateDataUserProfileDto: updateDataUserProfileDto) {
     return `This action updates a #${id} profile`;
   }
 
-  remove(id: number) {
+  removeUser(id: number) {
     return `This action removes a #${id} profile`;
   }
 }
