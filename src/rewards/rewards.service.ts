@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { CreateRewardDto } from './dto/create-reward.dto';
+import { GetRewardDto } from './dto/get-reward.dto copy';
 import { UpdateRewardDto } from './dto/update-reward.dto';
 
 @Injectable()
@@ -8,11 +9,11 @@ export class RewardsService {
     return 'This action adds a new reward';
   }
 
-  findAll() {
+  findAll(offset:number, count:number) {
     return `This action returns all rewards`;
   }
 
-  findOne(id: number) {
+  findOne(id: number, getRewardDto: GetRewardDto) {
     return `This action returns a #${id} reward`;
   }
 

@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { CreateStickerDto } from './dto/create-sticker.dto';
+import { GetStickerDto } from './dto/get-sticker.dto copy';
 import { UpdateStickerDto } from './dto/update-sticker.dto';
 
 @Injectable()
@@ -8,11 +9,11 @@ export class StickersService {
     return 'This action adds a new sticker';
   }
 
-  findAll() {
+  findAll(offset:number, count:number) {
     return `This action returns all stickers`;
   }
 
-  findOne(id: number) {
+  findOne(id: number, getStickerDto: GetStickerDto) {
     return `This action returns a #${id} sticker`;
   }
 

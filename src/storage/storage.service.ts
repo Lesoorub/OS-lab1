@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { CreateStorageDto } from './dto/create-storage.dto';
+import { GetStorageDto } from './dto/get-storage.dto';
 import { UpdateStorageDto } from './dto/update-storage.dto';
 
 @Injectable()
@@ -12,7 +13,7 @@ export class StorageService {
     return `This action returns all storage`;
   }
 
-  get(id: number) {
+  get(id: number, getStorageDto: GetStorageDto) {
     return `This action returns a #${id} storage`;
   }
 
