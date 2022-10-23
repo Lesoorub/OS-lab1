@@ -1,10 +1,8 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config/dist/config.module';
 import { SequelizeModule } from '@nestjs/sequelize';
-import { User } from './users/users.model';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
 import { UserModule } from './user/user.module';
 import { StorageModule } from './storage/storage.module';
@@ -31,11 +29,10 @@ import { RewardsModule } from './rewards/rewards.module';
       username: process.env.POSTGRES_USER,
       password: process.env.POSTGRES_PASS,
       database: process.env.POSTGRES_DB,
-      models: [User],
+      models: [],
       autoLoadModels: true,
     }),
     */
-    UsersModule,
     
     AuthModule,
     
