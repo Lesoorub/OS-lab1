@@ -23,11 +23,5 @@ export class UsersController {
   getAll() {
     return this.userService.getAllUsers();
   }
-
-  //Test
-  @Get(':id')
-  getid(@Body() userDto: CreateUserDto) {
-    return this.userService.getid(userDto);
-  }
-
+  
 }

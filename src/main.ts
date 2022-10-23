@@ -7,7 +7,7 @@ async function start() {
   const app = await NestFactory.create(AppModule);
 
   const config = new DocumentBuilder()
-    .setTitle('Лабораторная работа №2')
+    .setTitle('Лабораторная работа №3')
     .setDescription('Документация')
     .setVersion('1.0')
     .addTag('МоАИС-19')

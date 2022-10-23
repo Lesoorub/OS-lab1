@@ -18,9 +18,4 @@ export class UsersService {
     //return users;
     return [{id:1, name: 'Test'}]
   }
-
-  //Test
-  async getid(dto: CreateUserDto) {
-    return dto.id
-  }
 }
