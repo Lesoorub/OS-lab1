@@ -1,4 +1,4 @@
-version: '3.8'
+version: '3.9'
 
 services:
     server:
@@ -16,6 +16,17 @@ services:
             - ./server:/usr/src/app
             - /usr/src/app/node_modules
         restart: unless-stopped
-
+        depends_on:
+            - db
+    db:
+        container_name: db
+        image: postgres:14-bullseye
+        restart: always
+        environment:
+            POSTGRES_PASSWORD: root
+            POSTGRES_DB: testdb
+            POSTGRES_USER: postgres
+        ports:
+            - 5432:5432
 networks:
     server-network:
