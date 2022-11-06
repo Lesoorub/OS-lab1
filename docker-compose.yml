@@ -10,14 +10,14 @@ services:
         command: npm run start:dev
         ports:
             - 5000:5000
-        networks:
-            - server-network
         volumes:
             - ./server:/usr/src/app
             - /usr/src/app/node_modules
         restart: unless-stopped
         depends_on:
             - db
+        links:
+            - "db:database"
     db:
         container_name: db
         image: postgres:14-bullseye
@@ -28,5 +28,3 @@ services:
             POSTGRES_USER: postgres
         ports:
             - 5432:5432
-networks:
-    server-network:
