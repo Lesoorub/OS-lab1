@@ -1,66 +1,27 @@
-import { Injectable, Inject } from '@nestjs/common';
-import { LoginAuthDto } from './dto/login-auth.dto';
-import { RegisterAuthDto } from './dto/register-auth.dto';
-import { User } from './entities/auth.entity';
-import { USERS } from './auth.providers';
-
-const phoneValidator : RegExp = /^(?:\+\d{1,3})?(?:\d{9})$/
-const emailValidator : RegExp = /^(.+)@(.+)$/
+import { Injectable } from '@nestjs/common';
+import { UsersService } from '../users/users.service';
+import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
 export class AuthService {
+    constructor(
+        private usersService: UsersService,
+        private jwtService: JwtService
+    ) {}
 
-  constructor(
-    @Inject(USERS)
-    private Users: typeof User
-  ) {}
-
-  async login(LoginAuthDto: LoginAuthDto) {
-    let user = await this.Users.findOne<User>({
-      where: {
-        email: LoginAuthDto.email,
-        password: LoginAuthDto.password,
-      }
-    })
-
-    if (user != null)
-      {
-        return { status: "OK" }
-      }
-      else 
-      {
-        return { status: "Incorrect login or password" };
-      }
-  }
-
-  async register(RegisterAuthDto: RegisterAuthDto) {
-    if (RegisterAuthDto.name.length < 3)
-      return { status: "name is not valid" }
-    
-    const phone = RegisterAuthDto.mobile.replace(/[^\d\+]+/g, '');
-    
-    if (!phoneValidator.test(phone))
-      return { status: "mobile is not valid" }
-
-    if (!emailValidator.test(RegisterAuthDto.email))
-      return { status: "email is not valid" }
-
-    if (RegisterAuthDto.password.length < 3)
-      return { status: "password is not valid"}
-  
-
-    const [ user, created ] = await this.Users.findOrCreate<User>({
-      where: { phone: phone },
-      defaults: {
-        name: RegisterAuthDto.name,
-        mobile: phone,
-        password: RegisterAuthDto.password,
-        email: RegisterAuthDto.email
-      }
-    });
-    if (created) {
-      return { status: "OK" }
+    async validateUser(username: string, pass: string): Promise<any> {
+        const user = await this.usersService.findOne(username);
+        if (user && user.password === pass) {
+            const { password, ...result } = user;
+            return result;
+        }
+        return null;
     }
-    return { status: "Phone already exists" }
-  }
+
+    async login(user: any) {
+        const payload = { username: user.username, sub: user.userId };
+        return {
+            access_token: this.jwtService.sign(payload),
+        };
+    }
 }
