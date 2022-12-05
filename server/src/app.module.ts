@@ -11,6 +11,7 @@ import { ExercicesModule } from './exercices/exercices.module';
 import { FoodModule } from './food/food.module';
 import { StickersModule } from './stickers/stickers.module';
 import { RewardsModule } from './rewards/rewards.module';
+import { User } from './auth/entities/auth.entity';
 
 @Module({
   controllers: [AppController],
@@ -20,8 +21,6 @@ import { RewardsModule } from './rewards/rewards.module';
       envFilePath: `.${process.env.NODE_ENV}.env`,
     }),
     
-    /*
-    //БД Временно отключена
     SequelizeModule.forRoot({
       dialect: 'postgres',
       host: process.env.POSTGRES_HOST,
@@ -29,11 +28,12 @@ import { RewardsModule } from './rewards/rewards.module';
       username: process.env.POSTGRES_USER,
       password: process.env.POSTGRES_PASS,
       database: process.env.POSTGRES_DB,
-      models: [],
+      models: [User],
       autoLoadModels: true,
+      synchronize: true,
+      //logging: true //Для отображения запросов в консоли
     }),
-    */
-    
+
     AuthModule,
     
     UserModule,
