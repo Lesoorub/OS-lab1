@@ -21,6 +21,9 @@ export class AppController {
   // getHello(): string {
   //   return this.appService.getHello();
   // }
+
+  @ApiOperation({ summary: 'Авторизация' })
+  @ApiResponse({ status: 200 })
   @UseGuards(LocalAuthGuard)
   @Post('auth/login')
   async login(@Request() req) {
