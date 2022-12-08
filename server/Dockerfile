@@ -2,11 +2,10 @@ FROM node:16.17.0-bullseye
 
 WORKDIR /usr/src/app
 
-COPY package*.json ./
+COPY . .
 
 RUN npm install
 
-COPY . .
 
 # COPY --from=server /usr/src/app/dist ./dist
 
