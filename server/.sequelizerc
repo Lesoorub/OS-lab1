@@ -1,7 +1,7 @@
 const path = require('path');
 
 module.exports = {
-  'config': path.resolve(path.join('src', 'config'), 'sequelize.ts'),
+  'config': path.resolve(path.join('src', 'config'), 'sequelize.js'),
   'models-path': path.resolve(path.join('src', 'db'), 'models'),
   'seeders-path': path.resolve(path.join('src', 'db'), 'seeders'),
   'migrations-path': path.resolve(path.join('src', 'db'), 'migrations')
