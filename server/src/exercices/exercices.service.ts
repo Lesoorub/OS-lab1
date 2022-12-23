@@ -1,26 +1,46 @@
-import { Injectable } from '@nestjs/common';
-import { CreateExerciceDto } from './dto/create-exercice.dto';
-import { UpdateExerciceDto } from './dto/update-exercice.dto';
+import {Injectable} from '@nestjs/common';
+import {CreateExerciceDto} from './dto/create-exercice.dto';
+import {UpdateExerciceDto} from './dto/update-exercice.dto';
+
+import {Exercises} from './entity/Exercises.entity'
+import {InjectModel} from "@nestjs/sequelize";
 
 @Injectable()
 export class ExercicesService {
-  create(createExerciceDto: CreateExerciceDto) {
-    return 'This action adds a new exercice';
-  }
+    constructor(
+        @InjectModel(Exercises)
+        private readonly exercises: typeof Exercises,) {
+    }
 
-  getAll() {
-    return `This action returns all exercices`;
-  }
+    create(createExerciceDto: CreateExerciceDto) {
+        console.log(createExerciceDto)
+        console.log(createExerciceDto.title)
+        console.log(createExerciceDto.description)
+        console.log(createExerciceDto)
+        return this.exercises.create({
+            title: createExerciceDto.title,
+            description: createExerciceDto.description
 
-  getOne(id: number) {
-    return `This action returns a #${id} exercice`;
-  }
+        });
+    }
 
-  update(id: number, updateExerciceDto: UpdateExerciceDto) {
-    return `This action updates a #${id} exercice`;
-  }
+    getAll(): Promise<Exercises[]> {
+        return Exercises.findAll();
+    }
 
-  remove(id: number) {
-    return `This action removes a #${id} exercice`;
-  }
+    getOne(id: number) {
+        return Exercises.findAll({
+            where: {
+                id: +id
+            }
+        })
+    }
+
+    update(id: number, updateExerciceDto: UpdateExerciceDto) {
+        return `This action updates a #${id} exercice`;
+    }
+
+    remove(id: number) {
+        return `This action removes a #${id} exercice`;
+    }
 }

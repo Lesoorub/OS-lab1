@@ -12,6 +12,7 @@ import {FoodModule} from './food/food.module';
 import {StickersModule} from './stickers/stickers.module';
 import {RewardsModule} from './rewards/rewards.module';
 import {AuthModule} from './auth/auth.module';
+import {Exercises} from './exercices/entity/Exercises.entity'
 
 @Module({
     controllers: [AppController],
@@ -28,7 +29,7 @@ import {AuthModule} from './auth/auth.module';
             username: process.env.DATABASE_USER,
             password: process.env.DATABASE_PASS,
             database: process.env.DATABASE_DB,
-            models: [],
+            models: [Exercises],
             autoLoadModels: true,
             synchronize: true,
             logging: true //Для отображения запросов в консоли
