@@ -13,10 +13,6 @@ export class ExercicesService {
     }
 
     create(createExerciceDto: CreateExerciceDto) {
-        console.log(createExerciceDto)
-        console.log(createExerciceDto.title)
-        console.log(createExerciceDto.description)
-        console.log(createExerciceDto)
         return this.exercises.create({
             title: createExerciceDto.title,
             description: createExerciceDto.description
