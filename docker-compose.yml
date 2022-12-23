@@ -2,29 +2,54 @@ version: '3.9'
 
 services:
     server:
-        container_name: server
+        container_name: ${PROJECT_NAME}__server
         image: server:1.0.0
         build:
             context: ./server/
             dockerfile: ./Dockerfile
         command: npm run start:dev
         ports:
-            - 5000:5000
+            - ${BACKEND_PORT}:${BACKEND_PORT}
         volumes:
             - ./server:/usr/src/app
-            - /usr/src/app/node_modules
+            - ./server/node_modules:/usr/src/app/node_modules
+            - ./.env:/usr/src/app/.env
         restart: unless-stopped
         depends_on:
             - db
+            - storage
         links:
             - "db:database"
+    storage:
+        container_name: ${PROJECT_NAME}__storage
+        image: minio/minio:latest
+        ports:
+            - "9000:9000"
+            - "9001:9001"
+        volumes:
+            - ./storage/minio:/data
+        environment:
+            MINIO_ROOT_USER: ${MINIO_ROOT_USER}
+            MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD}
+        command: server --address 0.0.0.0:9000 /data --console-address ":9001"
+    createbuckets:
+        container_name: ${PROJECT_NAME}__createbuckets
+        image: minio/mc
+        depends_on:
+            - storage
+        entrypoint: >
+            /bin/sh -c "
+            /usr/bin/mc alias set local http://storage:9000 $MINIO_ROOT_USER $MINIO_ROOT_PASSWORD;
+            /usr/bin/mc mb local/$MINIO_BUCKET_NAME;
+            exit 0;
+            "
     db:
-        container_name: db
+        container_name: ${PROJECT_NAME}__db
         image: postgres:14-bullseye
         restart: always
         environment:
-            POSTGRES_PASSWORD: root
-            POSTGRES_DB: testdb
-            POSTGRES_USER: postgres
+            POSTGRES_DB: ${DATABASE_DB}
+            POSTGRES_USER: ${DATABASE_USER}
+            POSTGRES_PASSWORD: ${DATABASE_PASS}
         ports:
-            - 5432:5432
+            - ${DATABASE_PORT}:${DATABASE_PORT}
