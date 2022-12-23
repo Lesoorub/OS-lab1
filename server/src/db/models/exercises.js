@@ -15,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
     }
 
     Exercises.init({
-        tile: DataTypes.STRING(140),
+        title: DataTypes.STRING(140),
         description: DataTypes.TEXT
     }, {
         sequelize,
